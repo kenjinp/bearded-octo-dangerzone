@@ -44,8 +44,8 @@ gulp.task('htmlpage', function() {
 
 //JS concat, strip debugging then minify
 gulp.task('scripts', function() {
-  gulp.src(['./src/scripts/*.js'])
-    .pipe(concat('script.js'))
+  gulp.src(['./src/scripts/lib/*.js','./src/scripts/*.js'])
+    .pipe(concat('scripts.js'))
     .pipe(stripDebug())
     .pipe(uglify())
     .pipe(gulp.dest('./build/scripts'));
@@ -53,7 +53,7 @@ gulp.task('scripts', function() {
 
 //CSS sass, concat, auto-prefix and minify
 gulp.task('styles', function() {
-  gulp.src(['./src/styles/*scss'])
+  gulp.src(['./src/styles/normalize.css','./src/styles/*scss'])
     .pipe(sass())
     .pipe(concat('syles.css'))
     .pipe(autoprefix('last 2 versions'))
@@ -64,9 +64,9 @@ gulp.task('styles', function() {
 //default gulp task
 gulp.task('default', ['imagemin', 'htmlpage', 'scripts', 'styles'], function() {
   //watch for HTMl changes
-  gulp.watch('./src/*html', ['htmlpage']);
+  gulp.watch('./src/*.html', ['htmlpage']);
   //watch for JS changes
   gulp.watch('./src/scripts/*.js' ['jshint', 'scripts']);
   //watch for CSS changes
-  gulp.watch('./src/styles/*.css', ['styles']);
+  gulp.watch('./src/styles/*.scss', ['styles']);
 });

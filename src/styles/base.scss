@@ -1,0 +1,83 @@
+// Variables
+$font-stack: Helvetica, sans-serif;
+
+// Colors
+$background:    #f5f4ef;
+$text:          #74736f;
+$cta:           #729b0b;
+$dark-cta:      #374e04;
+$facebook:      #325b99;
+$dark-facebook: #253a58;
+$link:          #90cdf5;
+
+//mixins
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+//Base
+html{height:100%;position:relative;}
+
+body {
+  font:       100% $font-stack;
+  background-color:$background;
+  background:
+  linear-gradient(bottom, rgba(0,0,0,0.2) 0%, rgba(245,244,239,1) 15px);
+  color:                 $text;
+}
+
+a {
+  color:                 $link;
+  text-decoration:        none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+form {
+  background-color:#fff;
+  @include border-radius(10px);
+  margin:0px 6px 0px 6px;
+  padding: 10px 15px 25px 15px;
+}
+
+button {
+  border:none;
+  color:#fff;
+  height:35px;
+  width:auto;
+  margin:0 auto;
+  box-shadow: 0px 2px 0px 0px #ccc;
+  @include border-radius(5px);
+  &:focus {
+    outline:none;
+  }
+  &:active {
+    margin-top:2px;
+    box-shadow: none;
+  }
+}
+
+label {
+  text-transform:uppercase;
+}
+
+//layout
+#center {
+  position:relative;
+  margin:0 auto;
+  width:307px;
+}
+
+//modules
+.fb-signup {
+  background-color:$facebook;
+  box-shadow: 0px 2px 0px 0px $dark-facebook;
+}
+.call-to-action{
+  background-color:$cta;
+  box-shadow: 0px 2px 0px 0px $dark-cta;
+}
