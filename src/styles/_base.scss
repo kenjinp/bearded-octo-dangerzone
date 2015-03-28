@@ -4,6 +4,10 @@ $font-stack: Helvetica, sans-serif;
 // Colors
 $background:    #f5f4ef;
 $text:          #74736f;
+$gray:          #b7b7b7;
+$outline:       #bbb5b4;
+$warning:       #fc9929;
+$warning-bg:    #fadb93;
 $cta:           #729b0b;
 $dark-cta:      #374e04;
 $facebook:      #325b99;
@@ -19,14 +23,18 @@ $link:          #90cdf5;
 }
 
 //Base
-html{height:100%;position:relative;}
+html{
+  height:100%;
+  position:relative;
+  background: linear-gradient(bottom, rgba(0,0,0,0.2) 0%, rgba(245,244,239,1) 15px);
+}
 
 body {
   font:       100% $font-stack;
   background-color:$background;
-  background:
-  linear-gradient(bottom, rgba(0,0,0,0.2) 0%, rgba(245,244,239,1) 15px);
   color:                 $text;
+  text-align:           center;
+  padding-top:            50px;
 }
 
 a {
@@ -35,49 +43,48 @@ a {
   &:hover {
     text-decoration: underline;
   }
+  &:focus {
+    outline:none;
+  }
 }
 
 form {
   background-color:#fff;
   @include border-radius(10px);
-  margin:0px 6px 0px 6px;
-  padding: 10px 15px 25px 15px;
+  padding: 10px 20px 30px 20px;
+  text-align:left;
+  position:relative;
+  label {
+    display:block;
+    font-size:10px;
+    font-weight:600;
+    width:100%;
+    margin: 3px 0px 6px 0px;
+  }
+  input {
+    font-size:16px;
+  }
 }
 
 button {
   border:none;
   color:#fff;
-  height:35px;
-  width:auto;
+  height:45px;
+  width:370px;
   margin:0 auto;
+  display:block;
   box-shadow: 0px 2px 0px 0px #ccc;
+  position:relative;
   @include border-radius(5px);
   &:focus {
     outline:none;
   }
   &:active {
-    margin-top:2px;
+    top: 2px;
     box-shadow: none;
   }
 }
 
 label {
   text-transform:uppercase;
-}
-
-//layout
-#center {
-  position:relative;
-  margin:0 auto;
-  width:307px;
-}
-
-//modules
-.fb-signup {
-  background-color:$facebook;
-  box-shadow: 0px 2px 0px 0px $dark-facebook;
-}
-.call-to-action{
-  background-color:$cta;
-  box-shadow: 0px 2px 0px 0px $dark-cta;
 }

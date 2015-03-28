@@ -1,0 +1,157 @@
+//modules
+
+//input fields
+.input-bar {
+  position:relative;
+  margin-bottom:20px;
+  height:38px;
+  width:370px;
+  display: table;
+  box-sizing: border-box;
+  .input-tag {
+    position:relative;
+    display:table-cell;
+    border-top-left-radius:5px;
+    border-bottom-left-radius:5px;
+    background-color: #eaeaea;
+    width:1%;
+    padding:0px 20px 0px 20px;
+    z-index:0;
+    //height:38px;
+    height:100%;
+    border: 1px solid $outline;
+    border-right: none;
+    box-sizing : border-box;
+  }
+  .input-tag:last-child {
+    padding:0px 0px 0px 15px;
+    width:auto;
+    border:none;
+    border: 1px solid $outline;
+    border-left:none;
+    border-top-right-radius:5px;
+    border-bottom-right-radius:5px;
+    border-top-left-radius:0px;
+    border-bottom-left-radius:0px;
+    z-index:2;
+    input[type=checkbox] {
+      margin:10px 5px 10px 0px;
+    }
+    label {
+      display:inline;
+      margin-right:5px;
+    }
+  }
+  .input-field {
+    display:table-cell;
+    height:38px;
+    width:100%;
+    padding-left:10px;
+    border: 1px solid $outline;
+    border-top-right-radius:5px;
+    border-bottom-right-radius:5px;
+    z-index:2;
+    box-sizing: border-box;
+    &:focus {
+      border-color:$cta;
+      outline:none;
+    }
+  }
+  .input-field:not(:last-child){
+    width:100%;
+    border-top-right-radius:0px;
+    border-bottom-right-radius:0px;
+  }
+  .input-field.warning{
+    border: 1px solid $warning;
+  }
+}
+
+// terms checkbox
+.terms {
+  label {
+    float:left;
+    font-size:12px;
+    text-transform:none;
+    width:325px;
+    margin:10px 0px 20px;
+    line-height:16px;
+  }
+  input {
+    width:30px;
+    float:left;
+    margin:12px 0 0 15px;
+  }
+}
+
+//icons
+.icon {
+  position:absolute;
+  left:5px;
+  top:5px;
+  width:30px;
+  height:30px;
+}
+.icon.fb {
+  top:7px;
+  left:8px;
+  background-image:url('../images/fb.png');
+}
+.icon.user {
+  background-image:url('../images/user.png');
+}
+.icon.lock {
+  background-image:url('../images/lock.png');
+  top:3px;
+}
+.icon.mail {
+  background-image:url('../images/mail.png');
+}
+
+//call-to-action buttons
+.fb-signup {
+  background-color:$facebook;
+  box-shadow: 0px 2px 0px 0px $dark-facebook;
+}
+.call-to-action{
+  background-color:$cta;
+  box-shadow: 0px 2px 0px 0px $dark-cta;
+}
+
+.button-link { //use for <a href> <button>'s
+  &:hover {
+    text-decoration:none;
+  }
+}
+
+//page seperator with text
+.seperator {
+  margin:17px 20px 29px 20px;
+ .seperator-text {
+   font-size:12px;
+   text-transform:uppercase;
+   font-weight:800;
+   width:158px;
+   margin:0 auto;
+   position:relative;
+   top:7px;
+   background-color:$background;
+   text-shadow: 1px 1px 1px $gray;
+ }
+ .seperator-line {
+   height:1px;
+   background-color: $text;
+   display:block;
+   width:370px;
+   box-shadow: 0px 1px 0px 0px $gray;
+ }
+}
+
+.subtext {
+  font-size:14px;
+  font-weight:600;
+  padding-top:28px;
+  border-top: 1px solid #d7d7d7;
+  box-shadow: 0px -1px 0px 0px $gray;
+  margin: 30px 20px 0px 20px;
+}

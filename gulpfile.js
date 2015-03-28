@@ -53,7 +53,7 @@ gulp.task('scripts', function() {
 
 //CSS sass, concat, auto-prefix and minify
 gulp.task('styles', function() {
-  gulp.src(['./src/styles/normalize.css','./src/styles/*scss'])
+  gulp.src(['./src/styles/normalize.css','./src/styles/style.scss'])
     .pipe(sass())
     .pipe(concat('syles.css'))
     .pipe(autoprefix('last 2 versions'))
