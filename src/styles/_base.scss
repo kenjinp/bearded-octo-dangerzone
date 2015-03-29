@@ -23,18 +23,20 @@ $link:          #90cdf5;
 }
 
 //Base
-html{
+html {
+  max-width:100%;
+  overflow-x: hidden;
   height:100%;
   position:relative;
-  background: linear-gradient(bottom, rgba(0,0,0,0.2) 0%, rgba(245,244,239,1) 15px);
+  background: linear-gradient(bottom, rgba(0,0,0,0.3) 0%, rgba(245,244,239,1) 5%);
 }
 
 body {
   font:       100% $font-stack;
-  background-color:$background;
   color:                 $text;
   text-align:           center;
   padding-top:            50px;
+  background-color:$background;
 }
 
 a {
@@ -52,6 +54,7 @@ form {
   background-color:#fff;
   @include border-radius(10px);
   padding: 10px 20px 30px 20px;
+  margin: 10px;
   text-align:left;
   position:relative;
   label {
@@ -61,21 +64,20 @@ form {
     width:100%;
     margin: 3px 0px 6px 0px;
   }
-  input {
-    font-size:16px;
-  }
 }
 
 button {
   border:none;
   color:#fff;
-  height:45px;
-  width:370px;
+  height:35px;
+  width:100%;
   margin:0 auto;
   display:block;
   box-shadow: 0px 2px 0px 0px #ccc;
   position:relative;
+  box-sizing: border-box;
   @include border-radius(5px);
+  font-size:14px;
   &:focus {
     outline:none;
   }
@@ -87,4 +89,16 @@ button {
 
 label {
   text-transform:uppercase;
+}
+
+
+/* Landscape phones and portrait tablets */
+@media (min-width:481px) and (max-width: 767px) {
+  button {
+    height:45px;
+  }
+}
+
+/* Portrait tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
 }
