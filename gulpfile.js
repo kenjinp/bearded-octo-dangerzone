@@ -11,7 +11,10 @@ var jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
     sass = require('gulp-sass'),
     autoprefix = require('gulp-autoprefixer'),
-    minifyCSS = require('gulp-minify-css');
+    minifyCSS = require('gulp-minify-css'),
+    browserify = require('gulp-browserify'),
+    mocha = require('gulp-mocha');
+
 
 //JS hint task
 gulp.task('jshint', function () {
@@ -44,9 +47,12 @@ gulp.task('htmlpage', function() {
 
 //JS concat, strip debugging then minify
 gulp.task('scripts', function() {
-  gulp.src(['./src/scripts/lib/*.js','./src/scripts/*.js'])
+  var scriptSrc = ['./src/scripts/*.js'],
+      scriptDst = './build/scripts';
+  gulp.src(scriptSrc)
+    .pipe(browserify())
     .pipe(concat('scripts.js'))
-    .pipe(stripDebug())
+    //.pipe(stripDebug())
     .pipe(uglify())
     .pipe(gulp.dest('./build/scripts'));
 });
@@ -59,6 +65,12 @@ gulp.task('styles', function() {
     .pipe(autoprefix('last 2 versions'))
     .pipe(minifyCSS())
     .pipe(gulp.dest('./build/styles/'));
+});
+
+//dalek browser testing
+gulp.task('test', function() {
+  gulp.src('./src/scripts/spec/units.js')
+    .pipe(mocha({reporter: 'spec'}));
 });
 
 //default gulp task

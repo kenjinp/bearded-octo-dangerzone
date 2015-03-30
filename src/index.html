@@ -46,6 +46,14 @@
 
           <form>
 
+            <div class="messages warning hidden">
+              <span>es gab einige Fehler</span>
+            </div>
+
+            <div id="success" class="messages success hidden">
+              <span>Sie sind ein neues Mitglied!</span>
+            </div>
+
             <label for="vorname">vorname</label>
             <div class="input-bar">
               <span class="input-tag"><i class="icon user"></i></span>
@@ -73,11 +81,7 @@
             <label for="passwort">passwort</label>
             <div class="input-bar">
               <span class="input-tag"><i class="icon lock"></i></span>
-              <input class="input-field rightbox" type="password" name="passwort" required />
-              <span class="input-tag">
-                <input type="checkbox" name="show-pass"/>
-                <label for="show-pass">Anzeigen</label>
-              </span>
+              <input class="input-field show-pass-field" type="password" name="passwort" required />
             </div>
 
             <div class="terms">
