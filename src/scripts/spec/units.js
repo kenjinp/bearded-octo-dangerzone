@@ -13,10 +13,6 @@ var bob = {
   passwort: 'bobisthebest'
 }
 
-function hasClass(element, cls) {
-    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
-}
-
 describe('Signup Form', function() {
 
   this.timeout(20000);
@@ -24,7 +20,9 @@ describe('Signup Form', function() {
 
   describe('Is page there?', function() {
     it('should show form when loaded', function(done) {
-      new Nightmare()
+      new Nightmare({
+        webSecurity:false
+        })
         .goto(url)
         .evaluate(function() {
           return document.querySelectorAll('form').length;
@@ -87,7 +85,40 @@ describe('Signup Form', function() {
     });
   });
 
+  describe('#passwordStrength', function() {
 
+    describe('write crappy password', function() {
+      it('it should indicate bad password', function(done) {
+        new Nightmare()
+          .goto(url)
+          .type('input[name="passwort"]', 'aaaaa')
+          .evaluate(function() {
+              var el = document.querySelector('.pass-strength');
+              return el.classList.contains('warning');
+          }, function(result) {
+            result.should.not.equal(false);
+            done();
+          })
+          .run();
+      });
+    });
 
+    describe('write great password', function() {
+      it('it should indicate good password', function(done) {
+        new Nightmare()
+          .goto(url)
+          .type('input[name="passwort"]', 'aBanana123!@Jupiter')
+          .evaluate(function() {
+              var el = document.querySelector('.pass-strength');
+              return el.classList.contains('success');
+          }, function(result) {
+            result.should.not.equal(false);
+            done();
+          })
+          .run();
+      });
+    });
+
+  });//passwordStrength end
 
 });//SignupFormEnd

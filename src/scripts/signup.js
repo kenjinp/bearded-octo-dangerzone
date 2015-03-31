@@ -1,7 +1,8 @@
 "use strict";
 //browserify JQUERY
-var $ = require('jquery');
-var passStrength = require('./passwordStrength')
+var $ = require('jquery'),
+    passStrength = require('./passwordStrength'),
+    validate = require('./validation');
 
   //add the show password box if javascript is enabled
   function showPass() {
@@ -29,6 +30,7 @@ var passStrength = require('./passwordStrength')
     });
   };
 
+  //remove the browser validation tooltips
   function removeHTMLValidation() {
     document.querySelector( "form" )
     .addEventListener( "invalid", function( event ) {
@@ -36,84 +38,49 @@ var passStrength = require('./passwordStrength')
     }, true );
   };
 
-  function noBlankValidation() {
-    $( "form" ).each(function() {
-      var form = this;
-      // Add a tooltip to each invalid field
-      var invalidFields = $( ":invalid", form ).each(function() {
-          var field = $(this).append('<span>invalid!!!</span>');
-      });
-
-      $(':valid', form).each(function() {
-        $(this).removeClass('invalid');
-      });
-
-      // If there are errors, give focus to the first invalid field
-      invalidFields.first().trigger( "focus" ).eq( 0 ).focus();
-      invalidFields.first().addClass('invalid');
-    });
-  };
-
-  function validate(elm) {
-    var value = elm.val();
-
-    switch (elm.attr('type')) {
-      case 'email':
-        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        if (!re.test(value)) {
-          elm.removeClass('valid');
-          elm.addClass('invalid');
-          console.log('email invalid by regex')
-        } else {
-          elm.removeClass('invalid')
-          elm.addClass('valid');
-          console.log('valid')
-        }
-      case 'text' || 'password':
-        if (value == '') {
-          elm.removeClass('valid');
-          elm.addClass('invalid');
-          console.log('text or passwordfield invalid by blank')
-        } else {
-          elm.removeClass('invalid');
-          elm.addClass('valid');
-          console.log('valid');
-        }
-        break;
-      case 'checkbox':
-        if (elm.is(':checked') == false) {
-          elm.removeClass('valid');
-          elm.addClass('invalid');
-          console.log('checkbox not checked')
-        } else {
-          elm.removeClass('invalid');
-          elm.addClass('valid');
-          console.log('valid');
-        }
-        break;
+  //adds a tooltip to the first invalid input
+  function addFirstInvalidTooltip() {
+    $('.tooltip').remove();
+    var firstInvalid = $('input[required].invalid').first()
+    if ($('.tooltip').length > 0)  return
+    firstInvalid.after('<span id="'+firstInvalid.prop('name')+'" class="tooltip warning">'+validate(firstInvalid)+'</span>');
+    if ($('.tooltip').hasClass('shown')) {
+      return
+    } else {
+      setTimeout(function() {
+        $('.tooltip').addClass('shown');
+      }, 100);
     }
   }
 
+$(document).ready(function() {
   showPass();
   removeHTMLValidation();
 
-  //$('input[required]:visible').each(function(index) {
-  //}
-
+  //validate each input when user types and exits
   $( "input" ).blur(function() {
-    validate($(this));
+    console.log(validate($(this)));
+    addFirstInvalidTooltip() ;
   });
 
+  //submit form
   $('.call-to-action').on('click', function(even) {
     event.preventDefault();
+    //validate all require inputs on submit
     $('input[required]:visible').each(function(index) {
-      validate($(this))
+      validate($(this));
     });
 
-    if ($('form input[require]').length == $('form input.valid').length) {
+    addFirstInvalidTooltip();
+
+    if ($('form input[required]').length == $('form input.valid').length) {
       $('.messages.success').removeClass('hidden').addClass('shown');
+      $('.messages.warning').removeClass('shown').addClass('hidden');
+      //form valid, submit();
     } else {
       $('.messages.warning').removeClass('hidden').addClass('shown');
+      $('.messages.success').removeClass('shown').addClass('hidden');
+      //form invalid, show user error
     }
   });
 
@@ -129,7 +96,7 @@ var passStrength = require('./passwordStrength')
       $('.pass-strength').addClass('shown');
     }
 
-    //assign colors
+    //assign colors to password feedback message
     if (passStrength.rate(pass) > 60) {
       $('.pass-strength').addClass('success');
       $('.pass-strength').removeClass('warning');
@@ -139,3 +106,4 @@ var passStrength = require('./passwordStrength')
     }
 
   });
+});

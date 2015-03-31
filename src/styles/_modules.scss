@@ -77,10 +77,14 @@
   .input-field.invalid{
     border: 1px solid $warning;
   }
+  .input-field.valid{
+    border: 1px solid $cta;
+  }
 }
 
 // terms checkbox
 .terms {
+  position:relative;
   label {
     font-size:12px;
     text-transform:none;
@@ -175,6 +179,7 @@
   color:$cta;
   margin-top:3px;
   padding:3px 10px;
+  font-size:12px;
 }
 
 //top messages
@@ -203,6 +208,36 @@
 
 .shown {
   opacity: 1;
+}
+
+//tooltip
+.tooltip {
+  @include border-radius(5px);
+  padding:8px 12px;
+  left:0px;
+  bottom:-110%;
+  position:absolute;
+  z-index:100;
+  opacity:0;
+  transition: opacity 0.3s, transform 0.3s;
+  transform: translate3d(0,50px,0) rotate3d(1,1,1,-6deg);
+  &::after {
+    content: '';
+    top: -10px;
+    left: 20px;
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-top-color: transparent;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid $warning-bg;
+  }
+}
+.tooltip.shown {
+  opacity:1;
+  transform: translate3d(0,0,0);
 }
 
 //fit inputs into the smallest devices by removing right label
