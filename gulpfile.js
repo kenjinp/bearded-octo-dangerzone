@@ -47,13 +47,13 @@ gulp.task('htmlpage', function() {
 
 //JS concat, strip debugging then minify
 gulp.task('scripts', function() {
-  var scriptSrc = ['./src/scripts/*.js'],
+  var scriptSrc = ['./src/scripts/signup.js'],
       scriptDst = './build/scripts';
   gulp.src(scriptSrc)
     .pipe(browserify())
     .pipe(concat('scripts.js'))
     //.pipe(stripDebug())
-    .pipe(uglify())
+    //.pipe(uglify())
     .pipe(gulp.dest('./build/scripts'));
 });
 

@@ -167,6 +167,16 @@
   margin: 30px 0px;
 }
 
+//passStrength
+.pass-strength {
+  @include border-radius(5px);
+  width:30%;
+  background-color:$light-cta;
+  color:$cta;
+  margin-top:3px;
+  padding:3px 10px;
+}
+
 //top messages
 .messages {
   @include border-radius(5px);
@@ -176,12 +186,12 @@
   transition: all 1s ease-in;
 }
 
-.messages.warning {
+.warning {
   background-color:$warning-bg;
   color:$warning;
 }
 
-.messages.success {
+.success {
   background-color:$light-cta;
   color:$cta;
 }

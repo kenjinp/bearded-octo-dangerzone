@@ -1,9 +1,7 @@
+"use strict";
 //browserify JQUERY
 var $ = require('jquery');
-
-(function(){
-
-  "use strict";
+var passStrength = require('./passwordStrength')
 
   //add the show password box if javascript is enabled
   function showPass() {
@@ -96,10 +94,6 @@ var $ = require('jquery');
     }
   }
 
-  function passwordStrength() {
-
-  };
-
   showPass();
   removeHTMLValidation();
 
@@ -123,4 +117,25 @@ var $ = require('jquery');
     }
   });
 
-})();
+  //password strength visualization
+  $('input[name="passwort"]').on("keypress keyup keydown", function() {
+    var pass = $(this).val();
+    if (pass == '') {
+      $('.pass-strength').removeClass('shown');
+      $('.pass-strength').addClass('hidden');
+    } else {
+      $('.strength').text(passStrength.check(pass));
+      $('.pass-strength').removeClass('hidden');
+      $('.pass-strength').addClass('shown');
+    }
+
+    //assign colors
+    if (passStrength.rate(pass) > 60) {
+      $('.pass-strength').addClass('success');
+      $('.pass-strength').removeClass('warning');
+    } else {
+      $('.pass-strength').addClass('warning');
+      $('.pass-strength').removeClass('success');
+    }
+
+  });
