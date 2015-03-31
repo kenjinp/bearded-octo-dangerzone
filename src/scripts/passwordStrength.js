@@ -1,5 +1,3 @@
-"use strict";
-
 var passStrength = {};
 
 passStrength.rate = function (pass) {

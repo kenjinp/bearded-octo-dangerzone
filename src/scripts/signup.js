@@ -88,7 +88,7 @@ $(document).ready(function() {
 
   //validate each input when user types and exits
   $( "input" ).blur(function() {
-    console.log(validate($(this)));
+    validate($(this));
     addFirstInvalidTooltip() ;
   });
 
