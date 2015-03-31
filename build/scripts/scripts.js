@@ -9234,6 +9234,7 @@ var $ = require('jquery'),
           .insertBefore($input);
         $input.remove();
         $input = rep;
+        showPassStrength();
       });
     });
   };
@@ -9261,9 +9262,37 @@ var $ = require('jquery'),
     }
   }
 
+  //password strength visualization
+  function showPassStrength() {
+    $('input.show-pass-field').on("keypress keyup keydown", function() {
+      var pass = $(this).val();
+      if (pass == '') {
+        $('.pass-strength').removeClass('shown');
+        $('.pass-strength').addClass('hidden');
+      } else {
+        $('.strength').text(passStrength.check(pass));
+        $('.pass-strength').removeClass('hidden');
+        $('.pass-strength').addClass('shown');
+      }
+
+      //assign colors to password feedback message
+      if (passStrength.rate(pass) > 60) {
+        $('.pass-strength').addClass('success');
+        $('.pass-strength').removeClass('warning');
+      } else {
+        $('.pass-strength').addClass('warning');
+        $('.pass-strength').removeClass('success');
+      }
+    });
+  }
+
+//I've put this hear because we should disable
+//form submission as soon as possible
+removeHTMLValidation();
+
 $(document).ready(function() {
   showPass();
-  removeHTMLValidation();
+  showPassStrength();
 
   //validate each input when user types and exits
   $( "input" ).blur(function() {
@@ -9274,13 +9303,13 @@ $(document).ready(function() {
   //submit form
   $('.call-to-action').on('click', function(even) {
     event.preventDefault();
-    //validate all require inputs on submit
+    //validate each required inputs on submit
     $('input[required]:visible').each(function(index) {
       validate($(this));
     });
-
+    //show feedpack after attempted submission
     addFirstInvalidTooltip();
-
+    //is the form in its entirety valid?
     if ($('form input[required]').length == $('form input.valid').length) {
       $('.messages.success').removeClass('hidden').addClass('shown');
       $('.messages.warning').removeClass('shown').addClass('hidden');
@@ -9292,28 +9321,6 @@ $(document).ready(function() {
     }
   });
 
-  //password strength visualization
-  $('input[name="passwort"]').on("keypress keyup keydown", function() {
-    var pass = $(this).val();
-    if (pass == '') {
-      $('.pass-strength').removeClass('shown');
-      $('.pass-strength').addClass('hidden');
-    } else {
-      $('.strength').text(passStrength.check(pass));
-      $('.pass-strength').removeClass('hidden');
-      $('.pass-strength').addClass('shown');
-    }
-
-    //assign colors to password feedback message
-    if (passStrength.rate(pass) > 60) {
-      $('.pass-strength').addClass('success');
-      $('.pass-strength').removeClass('warning');
-    } else {
-      $('.pass-strength').addClass('warning');
-      $('.pass-strength').removeClass('success');
-    }
-
-  });
 });
 
 },{"./passwordStrength":3,"./validation":4,"jquery":1}],3:[function(require,module,exports){
