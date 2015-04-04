@@ -1,5 +1,5 @@
-"use strict";
 //browserify JQUERY
+
 var $ = require('jquery'),
     passStrength = require('./passwordStrength'),
     validate = require('./validation');
@@ -14,7 +14,7 @@ var $ = require('jquery'),
         '<input type="checkbox" name="show-pass"></input>' +
         '<label for="show-pass">Anzeigen</label>' +
         '</span>'
-      )
+      );
       $('input[name="show-pass"]').click(function() {
         var change= $(this).is(':checked') ? 'text' : 'password';
         var rep = $('<input type="' + change + '" />')
@@ -29,7 +29,7 @@ var $ = require('jquery'),
         showPassStrength();
       });
     });
-  };
+  }
 
   //remove the browser validation tooltips
   function removeHTMLValidation() {
@@ -37,16 +37,16 @@ var $ = require('jquery'),
     .addEventListener( "invalid", function( event ) {
         event.preventDefault();
     }, true );
-  };
+  }
 
   //adds a tooltip to the first invalid input
   function addFirstInvalidTooltip() {
     $('.tooltip').remove();
-    var firstInvalid = $('input[required].invalid').first()
-    if ($('.tooltip').length > 0)  return
+    var firstInvalid = $('input[required].invalid').first();
+    if ($('.tooltip').length > 0)  return;
     firstInvalid.after('<span id="'+firstInvalid.prop('name')+'" class="tooltip warning">'+validate(firstInvalid)+'</span>');
     if ($('.tooltip').hasClass('shown')) {
-      return
+      return;
     } else {
       setTimeout(function() {
         $('.tooltip').addClass('shown');
@@ -58,7 +58,7 @@ var $ = require('jquery'),
   function showPassStrength() {
     $('input.show-pass-field').on("keypress keyup keydown", function() {
       var pass = $(this).val();
-      if (pass == '') {
+      if (pass === '') {
         $('.pass-strength').removeClass('shown');
         $('.pass-strength').addClass('hidden');
       } else {

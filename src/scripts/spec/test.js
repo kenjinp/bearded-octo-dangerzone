@@ -1,28 +1,45 @@
 //mocha testing
 'use strict';
 
-var path = require('path');
-var Nightmare = require('nightmare');
-var should = require('chai').should()
+//dependencies
+var path = require('path'),
+    Nightmare = require('nightmare'),
+    should = require('chai').should(),
+    fs = require('fs');
 
+function getDirectories(srcpath) {
+  return fs.readdirSync(srcpath).filter(function(file) {
+    return fs.statSync(path.join(srcpath, file)).isDirectory();
+  });
+}
+
+console.log(__dirname);
+console.log(getDirectories(__dirname));
+
+//tests
+var passStrengthSpec = require('./modules/passwordStrength_spec'),
+    integrationSpec = require('./integration/signup_spec')
+
+//run pass strength module;
+passStrengthSpec;
+
+//quick fake user
 var bob = {
   vorname: 'bob',
   nochname: 'schmidt',
   mitgliedsname: 'bobschmidt2001',
   email: 'bob@lol.com',
   passwort: 'bobisthebest'
-}
+};
 
 describe('Signup Form', function() {
 
   this.timeout(20000);
-  var url = 'file:///Users/Kenjin/Repositories/bearded-octo-dangerzone/build/index.html'
+  var url = 'file://' + path.resolve(__dirname, '../../../build/index.html');
 
   describe('Is page there?', function() {
     it('should show form when loaded', function(done) {
-      new Nightmare({
-        webSecurity:false
-        })
+      new Nightmare({webSecurity:false})
         .goto(url)
         .evaluate(function() {
           return document.querySelectorAll('form').length;

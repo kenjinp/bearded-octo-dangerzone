@@ -13,15 +13,22 @@ var jshint = require('gulp-jshint'),
     autoprefix = require('gulp-autoprefixer'),
     minifyCSS = require('gulp-minify-css'),
     browserify = require('gulp-browserify'),
-    mocha = require('gulp-mocha');
+    mocha = require('gulp-mocha'),
+    scsslint = require('gulp-scss-lint');
 
 
 //JS hint task
-gulp.task('jshint', function () {
+gulp.task('jshint', function() {
   gulp.src('./src/scripts/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
+
+//scss lint
+gulp.task('scss-lint', function() {
+  gulp.src('./src/styles/*.scss')
+    .pipe(scsslint());
+})
 
 //minify new images
 gulp.task('imagemin', function() {
@@ -52,8 +59,8 @@ gulp.task('scripts', function() {
   gulp.src(scriptSrc)
     .pipe(browserify())
     .pipe(concat('scripts.js'))
-    .pipe(stripDebug())
-    .pipe(uglify())
+    //.pipe(stripDebug())
+    //.pipe(uglify())
     .pipe(gulp.dest('./build/scripts'));
 });
 
@@ -69,7 +76,7 @@ gulp.task('styles', function() {
 
 //dalek browser testing
 gulp.task('test', function() {
-  gulp.src('./src/scripts/spec/units.js')
+  gulp.src('./src/scripts/spec/test.js')
     .pipe(mocha({reporter: 'spec'}));
 });
 

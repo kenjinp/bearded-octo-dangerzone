@@ -2,208 +2,222 @@
 
 //center padding for consistency of non form elements
 .center-pad {
-  position:relative;
-  padding:0px 30px;
-  width:100%;
-  box-sizing:border-box;
+  box-sizing: border-box;
+  padding: 0 30px;
+  position: relative;
+  width: 100%;
 }
-
 
 //input fields
 .input-bar {
-  position:relative;
-  margin-bottom:20px;
-  height:38px;
-  display: table;
   box-sizing: border-box;
+  display: table;
+  height: 38px;
+  margin-bottom: 20px;
+  position: relative;
+
   .input-tag {
-    position:relative;
-    display:table-cell;
-    border-top-left-radius:5px;
-    border-bottom-left-radius:5px;
-    background-color: #eaeaea;
-    width:1%;
-    padding:0px 20px 0px 20px;
-    z-index:0;
-    //height:38px;
-    height:100%;
+    background-color: $tag-gray;
     border: 1px solid $outline;
-    border-right: none;
-    box-sizing : border-box;
-  }
-  .input-tag:last-child {
-    padding:0px 0px 0px 15px;
-    width:auto;
-    border:none;
-    border: 1px solid $outline;
-    border-left:none;
-    border-top-right-radius:5px;
-    border-bottom-right-radius:5px;
-    border-top-left-radius:0px;
-    border-bottom-left-radius:0px;
-    z-index:2;
-    input[type=checkbox] {
-      margin:10px 5px 10px 0px;
-    }
-    label {
-      display:inline;
-      margin-right:5px;
-    }
-  }
-  .input-field {
-    display:table-cell;
-    height:38px;
-    width:100%;
-    padding-left:10px;
-    border: 1px solid $outline;
-    border-top-right-radius:5px;
-    border-bottom-right-radius:5px;
-    border-top-left-radius:0px;
-    border-bottom-left-radius:0px;
-    z-index:2;
+    border-bottom-left-radius: 5px;
+    border-right: 0;
+    border-top-left-radius: 5px;
     box-sizing: border-box;
-    &:focus {
-      border-color:#c7e187;
-      outline:none;
-      //background-color:#c7e187;
-      //color:#fff;
+    display: table-cell;
+    height: 100%;
+    padding: 0 20px;
+    position: relative;
+    width: 1%;
+    z-index: 0;
+  }
+
+  .input-tag:last-child {
+    border: 1px solid $outline;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 5px;
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 5px;
+    padding: 0 0 0 5px;
+    width: auto;
+    z-index: 2;
+
+    input {
+      margin: 10px 5px;
+    }
+
+    label {
+      display: inline;
+      margin-right: 5px;
     }
   }
-  .input-field:not(:last-child){
-    width:100%;
-    border-top-right-radius:0px;
-    border-bottom-right-radius:0px;
+
+  .input-field {
+    border: 1px solid $outline;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 5px;
+    box-sizing: border-box;
+    display: table-cell;
+    height: 38px;
+    padding-left: 10px;
+    width: 100%;
+    z-index: 2;
+
+    &:focus {
+      border-color: $light-cta;
+      outline: none;
+    }
   }
-  .input-field.invalid{
+
+  .input-field:not(:last-child) {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    width: 100%;
+  }
+
+  .invalid {
     border: 1px solid $warning;
   }
-  .input-field.valid{
+
+  .valid {
     border: 1px solid $cta;
   }
 }
 
 // terms checkbox
 .terms {
-  position:relative;
+  position: relative;
+
   label {
-    font-size:12px;
-    text-transform:none;
-    line-height:16px;
-    margin:30px 0px 45px;
+    font-size: 12px;
+    line-height: 16px;
+    margin: 30px 0 45px;
+    text-transform: none;
   }
+
   input {
-    float:left;
-    width:30px;
-    margin:0px 15px 30px;
+    float: left;
+    margin: 0 15px 30px;
+    width: 30px;
   }
 }
 
 //icons
 .icon {
-  position:absolute;
-  left:5px;
-  top:5px;
-  width:30px;
-  height:30px;
-}
-.icon.fb {
-  top:5px;
-  left:8px;
-  background-image:url('../images/fb.png');
-}
-.icon.user {
-  background-image:url('../images/user.png');
-}
-.icon.lock {
-  background-image:url('../images/lock.png');
-  top:3px;
-}
-.icon.mail {
-  background-image:url('../images/mail.png');
+  height: 30px;
+  left: 5px;
+  position: absolute;
+  top: 5px;
+  width: 30px;
+
+  &.fb {
+    background-image: url('../images/fb.png');
+    left: 8px;
+    top: 5px;
+  }
+
+  &.user {
+    background-image: url('../images/user.png');
+  }
+
+  &.lock {
+    background-image: url('../images/lock.png');
+    top: 3px;
+  }
+
+  &.mail {
+    background-image: url('../images/mail.png');
+  }
 }
 
 //call-to-action buttons
 .fb-signup {
-  background-color:$facebook;
-  box-shadow: 0px 2px 0px 0px $dark-facebook;
+  background-color: $facebook;
+  box-shadow: 0 2px 0 0 $dark-facebook;
 }
-.call-to-action{
-  background-color:$cta;
-  box-shadow: 0px 2px 0px 0px $dark-cta;
+
+.call-to-action {
+  background-color: $cta;
+  box-shadow: 0 2px 0 0 $dark-cta;
 }
 
 .button-link { //use for <a href> <button>'s
+
   &:hover {
-    text-decoration:none;
+    text-decoration: none;
   }
 }
 
 //page seperator with text
 .seperator {
-  position:relative;
-  margin:25px 0px 29px;
- .seperator-text {
-   font-size:12px;
-   text-transform:uppercase;
-   font-weight:800;
-   width:158px;
-   margin:0 auto;
-   position:relative;
-   top:7px;
-   background-color:$background;
-   text-shadow: 1px 1px 1px $gray;
- }
- .seperator-line {
-   height:1px;
-   background-color: $text;
-   display:block;
-   width:100%;
-   box-shadow: 0px 1px 0px 0px $gray;
- }
+  margin: 25px 0 29px;
+  position: relative;
+
+  .seperator-text {
+    background-color: $background;
+    font-size: 12px;
+    font-weight: 800;
+    margin: 0 auto;
+    position: relative;
+    text-shadow: 1px 1px 1px $gray;
+    text-transform: uppercase;
+    top: 7px;
+    width: 158px;
+  }
+
+  .seperator-line {
+    background-color: $text;
+    box-shadow: 0 1px 0 0 $gray;
+    display: block;
+    height: 1px;
+    width: 100%;
+  }
 }
 
 .subtext {
-  font-size:14px;
-  font-weight:600;
-  padding-top:28px;
-  border-top: 1px solid #d7d7d7;
-  box-shadow: 0px -1px 0px 0px $gray;
-  margin: 30px 0px;
+  border-top: 1px solid $gray;
+  box-shadow: 0 -1px 0 0 $text;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 30px 0;
+  padding-top: 28px;
 }
 
 //passStrength
 .pass-strength {
   @include border-radius(5px);
-  width:30%;
-  background-color:$light-cta;
-  color:$cta;
-  margin-top:3px;
-  padding:3px 10px;
-  font-size:12px;
+  background-color: $light-cta;
+  color: $cta;
+  font-size: 12px;
+  margin-top: 3px;
+  padding: 3px 10px;
+  width: 30%;
 }
 
 //top messages
 .messages {
   @include border-radius(5px);
-  text-align:center;
-  padding:11px;
-  margin:10px 0px 20px;
+  margin: 10px 0 20px;
+  padding: 11px;
+  text-align: center;
   transition: all 1s ease-in;
 }
 
 .warning {
-  background-color:$warning-bg;
-  color:$warning;
+  background-color: $warning-bg;
+  color: $warning;
 }
 
 .success {
-  background-color:$light-cta;
-  color:$cta;
+  background-color: $light-cta;
+  color: $cta;
 }
 
 .hidden {
+  display: none;
   opacity: 0;
-  display:none;
 }
 
 .shown {
@@ -213,48 +227,55 @@
 //tooltip
 .tooltip {
   @include border-radius(5px);
-  padding:8px 12px;
-  left:0px;
-  bottom:-110%;
-  position:absolute;
-  z-index:100;
-  opacity:0;
-  transition: opacity 0.3s, transform 0.3s;
-  transform: translate3d(0,50px,0) rotate3d(1,1,1,-6deg);
+  bottom: -110%;
+  left: 0;
+  opacity: 0;
+  padding: 8px 12px;
+  position: absolute;
+  transform: translate3d(0, 50px, 0) rotate3d(1, 1, 1, -6deg);
+  transition: opacity .3s, transform .3s;
+  z-index: 100;
+
   &::after {
-    content: '';
-    top: -10px;
-    left: 20px;
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-top-color: transparent;
+    border-bottom: 10px solid $warning-bg;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 10px solid $warning-bg;
+    border-top-color: transparent;
+    content: '';
+    height: 0;
+    left: 20px;
+    pointer-events: none;
+    position: absolute;
+    top: -10px;
+    width: 0;
+  }
+
+  &.shown {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
-.tooltip.shown {
-  opacity:1;
-  transform: translate3d(0,0,0);
-}
 
-//fit inputs into the smallest devices by removing right label
 @media (max-width:370px) {
+
   .input-bar .input-tag:last-child {
-    padding-right: 15px;
+    padding: 0 5px;
+
     label {
-      display:none;
+      display: none;
     }
-    input[type=checkbox] {
-      margin-right:0px;
-    }
+  }
+
+  .terms {
+    //input {
+    //  margin-right: 0;
+    //}
   }
 }
 
 @media (min-width:481px) and (max-width: 1199px) {
+
   .fb-signup {
-    top:7px;
+    top: 7px;
   }
 }

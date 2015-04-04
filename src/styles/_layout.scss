@@ -1,24 +1,26 @@
 //layouts
 #center {
-  position:relative;
-  width:100%;
-  padding-bottom:30px;
+  padding-bottom: 30px;
+  position: relative;
+  width: 100%;
 }
 
-/* Landscape phones and portrait tablets */
+// Landscape phones and portrait tablets
 @media (min-width:481px) and (max-width: 767px) {
+
   #center {
-    margin:0 auto;
-    width:60%;
-    min-width:380px;
-    max-width:410px;
+    margin: 0 auto;
+    max-width: 410px;
+    min-width: 380px;
+    width: 60%;
   }
 }
 
-/* Portrait tablets and medium desktops */
+// Portrait tablets and medium desktops
 @media (min-width: 768px){
+
   #center {
-    margin:0 auto;
-    max-width:410px;
+    margin: 0 auto;
+    max-width: 410px;
   }
 }
