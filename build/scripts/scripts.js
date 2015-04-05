@@ -9206,11 +9206,13 @@ return jQuery;
 }));
 
 },{}],2:[function(require,module,exports){
+(function (global){
 //browserify JQUERY
+global.jQuery = global.$ = require('jquery');
 
-var $ = require('jquery'),
-    passStrength = require('./passwordStrength'),
-    validate = require('./validation');
+var passStrength = require('./passwordStrength'),
+    validate = require('./validation'),
+    validator = require('./jquery.validator');
 
   //add the show password box if javascript is enabled
   function showPass() {
@@ -9294,8 +9296,9 @@ $(document).ready(function() {
   showPass();
   showPassStrength();
 
+  $('input').validator();
   //validate each input when user types and exits
-  $( "input" ).blur(function() {
+  $('input').blur(function() {
     validate($(this));
     addFirstInvalidTooltip() ;
   });
@@ -9323,23 +9326,38 @@ $(document).ready(function() {
 
 });
 
-},{"./passwordStrength":3,"./validation":4,"jquery":1}],3:[function(require,module,exports){
+}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./jquery.validator":3,"./passwordStrength":4,"./validation":5,"jquery":1}],3:[function(require,module,exports){
+(function($) {
+'use strict';
+
+$.fn.validator = function() {
+    this.each(function() {
+      var elm = $(this);
+      if (elm.is('input')) {
+        console.log('poop!');
+      } else {
+        console.log('poop!');
+      }
+    });
+    return this;
+  };
+})(jQuery);
+
+},{}],4:[function(require,module,exports){
 var passStrength = {};
 
-passStrength.rate = function (pass) {
+passStrength.rate = function(pass) {
     //where we store the strength
     var score = 0;
-
     if (!pass)
-        return score; //no score for nothing
-
+        return score; //no score for blank password
     // award every unique letter until 5 repetitions
     var letters = {};
     for (var i=0; i<pass.length; i++) {
         letters[pass[i]] = (letters[pass[i]] || 0) + 1;
         score += 5.0 / letters[pass[i]];
     }
-
     // bonus points for mixing it up
     var variations = {
         digits: /\d/.test(pass),
@@ -9347,7 +9365,6 @@ passStrength.rate = function (pass) {
         upper: /[A-Z]/.test(pass),
         nonWords: /\W/.test(pass),
     };
-
     var variationCount = 0;
     for (var check in variations) {
         variationCount += (variations[check] === true) ? 1 : 0;
@@ -9372,7 +9389,7 @@ passStrength.check = function(pass) {
 
 module.exports = passStrength;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 //validate input function
 module.exports = function(elm) {
   var value = elm.val();

@@ -32,7 +32,6 @@ function runAllTests() {
   for (var i in testTypes) {
       var testType = testTypes[i];
       describe(testType, function() {
-      //find all tests in each test type
       var tests = getFiles(__dirname + '/' + testType);
       for (var i in tests) {
         var test = tests[i];

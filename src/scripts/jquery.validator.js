@@ -1,12 +1,13 @@
 (function($) {
-  'use strict';
-  $.fn.validator = function() {
+'use strict';
+
+$.fn.validator = function() {
     this.each(function() {
       var elm = $(this);
       if (elm.is('input')) {
-        elm.text('input');
+        console.log('Im alive!');
       } else {
-        elm.text('not input');
+        console.log('HelloWorld!');
       }
     });
     return this;

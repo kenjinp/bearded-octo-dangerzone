@@ -71,13 +71,13 @@ describe('Signup Form', function() {
         .type('input[name="mitgliedsname"]', bob.mitgliedsname)
         .type('input[name="email"]', bob.email)
         .type('input[name="passwort"]', bob.passwort)
-        .click('inpit[name="terms"]')
+        .click('input[name="terms"]')
         .click('.call-to-action')
         .evaluate(function() {
             var el = document.querySelector('.success');
             return el.classList.contains('hidden');
         }, function(result) {
-          result.should.not.equal(true);
+          result.should.not.equal(false);
           done();
         })
         .run();

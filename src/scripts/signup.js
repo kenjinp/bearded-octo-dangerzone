@@ -1,8 +1,9 @@
 //browserify JQUERY
+global.jQuery = global.$ = require('jquery');
 
-var $ = require('jquery'),
-    passStrength = require('./passwordStrength'),
-    validate = require('./validation');
+var passStrength = require('./passwordStrength'),
+    validate = require('./validation'),
+    validator = require('./jquery.validator');
 
   //add the show password box if javascript is enabled
   function showPass() {
@@ -86,8 +87,9 @@ $(document).ready(function() {
   showPass();
   showPassStrength();
 
+  $('input').validator();
   //validate each input when user types and exits
-  $( "input" ).blur(function() {
+  $('input').blur(function() {
     validate($(this));
     addFirstInvalidTooltip() ;
   });
