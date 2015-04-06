@@ -5,6 +5,11 @@ var path = require('path'),
     Nightmare = require('nightmare'),
     should = require('chai').should();
 
+//module integration tests
+var passStrengthIntegration = require('./modules/passwordStrength_integration'),
+    jqvIntegration = require('./modules/jquery.validator_integration');
+
+
 //quick fake user
 var bob = {
   vorname: 'bob',
@@ -21,12 +26,25 @@ describe('Signup Form', function() {
 
   describe('Is page there?', function() {
     it('should show form when loaded', function(done) {
-      new Nightmare({webSecurity:false})
+      new Nightmare()
         .goto(url)
         .evaluate(function() {
           return document.querySelectorAll('form').length;
         }, function(result) {
           result.should.equal(1);
+          done();
+        })
+        .run();
+    });
+
+    it('it should have the name value in input', function(done) {
+      new Nightmare()
+        .goto(url)
+        .type('input[name="vorname"]',bob.vorname)
+        .evaluate(function() {
+          return document.querySelector('input[name="vorname"]').value;
+        }, function(result) {
+          result.should.equal(bob.vorname);
           done();
         })
         .run();
@@ -45,17 +63,14 @@ describe('Signup Form', function() {
         })
         .run();
     });
-  });
-
-  describe('type name into name input', function() {
-    it('it should have the name value in input', function(done) {
+    it('should show password if show-pass is checked', function(done) {
       new Nightmare()
         .goto(url)
-        .type('input[name="vorname"]',bob.vorname)
+        .click('input[name="show-pass"]')
         .evaluate(function() {
-          return document.querySelector('input[name="vorname"]').value;
+          return document.querySelectorAll('input[name="passwort"]')[0].getAttribute('type');
         }, function(result) {
-          result.should.equal(bob.vorname);
+          result.should.equal('text');
           done();
         })
         .run();
@@ -84,40 +99,8 @@ describe('Signup Form', function() {
     });
   });
 
-  describe('#passwordStrength', function() {
-
-    describe('write crappy password', function() {
-      it('it should indicate bad password', function(done) {
-        new Nightmare()
-          .goto(url)
-          .type('input[name="passwort"]', 'aaaaa')
-          .evaluate(function() {
-              var el = document.querySelector('.pass-strength');
-              return el.classList.contains('warning');
-          }, function(result) {
-            result.should.not.equal(false);
-            done();
-          })
-          .run();
-      });
-    });
-
-    describe('write great password', function() {
-      it('it should indicate good password', function(done) {
-        new Nightmare()
-          .goto(url)
-          .type('input[name="passwort"]', 'aBanana123!@Jupiter')
-          .evaluate(function() {
-              var el = document.querySelector('.pass-strength');
-              return el.classList.contains('success');
-          }, function(result) {
-            result.should.not.equal(false);
-            done();
-          })
-          .run();
-      });
-    });
-
-  });//passwordStrength end
+  //module integrations
+  passStrengthIntegration(url);
+  jqvIntegration(url);
 
 });//SignupFormEnd
