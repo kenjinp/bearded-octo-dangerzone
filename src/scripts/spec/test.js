@@ -1,6 +1,5 @@
 //mocha testing
 'use strict';
-
 //dependencies
 var path = require('path'),
     Nightmare = require('nightmare'),

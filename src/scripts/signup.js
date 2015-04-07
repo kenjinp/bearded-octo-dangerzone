@@ -2,7 +2,6 @@
 global.jQuery = global.$ = require('jquery');
 
 var passStrength = require('./passwordStrength'),
-    validate = require('./validation'),
     validator = require('./jquery.validator');
 
   //add the show password box if javascript is enabled
@@ -60,13 +59,15 @@ $(document).ready(function() {
   showPass();
   showPassStrength();
 
-  //attatch validation to form with error messages
-  $('form').validator({
-    'error_messages' : {
+  //Validator plugin config
+  var options = {
+    //error messages for this form
+    'errorMessages' : {
       'required' : 'muss ausgefüllt werden',
       'email' : 'dies ist nicht eine email',
       'checkbox' : 'Bitte stimmen Sie den Geschäfts'
     },
+    //bind warnings on validator's onSubmit when form is submitted
     onSubmit: function(validated) {
       if (validated === true) {
         //form valid, show errors
@@ -79,6 +80,9 @@ $(document).ready(function() {
         $('.messages.success').removeClass('shown').addClass('hidden');
       }
     }
-  });
+  };
+
+  //apply validaiton to form
+  $('form').validator(options);
 
 });

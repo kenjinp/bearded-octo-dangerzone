@@ -37,7 +37,7 @@ describe('Signup Form', function() {
         .run();
     });
 
-    it('it should have the name value in input', function(done) {
+    it('it should have the name value in input if we type something there', function(done) {
       new Nightmare()
         .goto(url)
         .type('input[name="vorname"]',bob.vorname)
@@ -71,28 +71,6 @@ describe('Signup Form', function() {
           return document.querySelectorAll('input[name="passwort"]')[0].getAttribute('type');
         }, function(result) {
           result.should.equal('text');
-          done();
-        })
-        .run();
-    });
-  });
-
-  describe('submit valid form', function() {
-    it('it should show a success message', function(done) {
-      new Nightmare()
-        .goto(url)
-        .type('input[name="vorname"]', bob.vorname)
-        .type('input[name="nachname"]', bob.nachname)
-        .type('input[name="mitgliedsname"]', bob.mitgliedsname)
-        .type('input[name="email"]', bob.email)
-        .type('input[name="passwort"]', bob.passwort)
-        .click('input[name="terms"]')
-        .click('.call-to-action')
-        .evaluate(function() {
-            var el = document.querySelector('.success');
-            return el.classList.contains('hidden');
-        }, function(result) {
-          result.should.not.equal(false);
           done();
         })
         .run();

@@ -19,7 +19,13 @@ var jshint = require('gulp-jshint'),
 
 //JS hint task
 gulp.task('jshint', function() {
-  gulp.src('./src/scripts/*.js')
+  gulp.src([
+    './src/scripts/*.js',
+     './src/scripts/spec/*.js',
+     './src/scripts/spec/modules/*.js',
+     './src/scripts/spec/integration/*.js',
+     './src/scripts/spec/integration/modules*.js'
+  ])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
